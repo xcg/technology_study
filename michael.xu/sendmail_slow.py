@@ -31,7 +31,10 @@ def sendHtmlMail(mailcontent,myip):
     smtp = smtplib.SMTP()
     smtp.connect(smtpserver)
     smtp.login(username, password)
-    smtp.sendmail(sender, [receiver, cc_user], msg.as_string())
+    # 针对 收邮件的人 和 抄送邮件的人 都是单个，用下面方法
+    #smtp.sendmail(sender, [receiver, cc_user], msg.as_string())
+    # 下面这个针对 收邮件的人 和 抄送邮件的人 都是多个，都是列表时，用下面方法
+    smtp.sendmail(sender,receiver+cc_user,msg.as_string())
     smtp.quit()
   except Exception, e:
     print e,'send mail error'
@@ -41,10 +44,9 @@ if __name__=='__main__':
   myiplist=['127.0.0.1']
   week=(datetime.now()-timedelta(days=7)).strftime("%Y-%m-%d 00:00:00")
   today=datetime.now().strftime("%Y-%m-%d 00:00:00")
-  yestoday=(datetime.now()-timedelta(days=1)).strftime("%Y-%m-%d")
   #print week,today
   for myip in myiplist:
-    sql="select SUM(ts_cnt),left(SUM(Query_time_sum)/SUM(ts_cnt),5),source.first_seen,source.last_seen,history.sample,CHECKSUM FROM  slow_query.global_query_review AS source JOIN slow_query.global_query_review_history AS history USING (CHECKSUM) WHERE history.ts_min >='%s' AND history.ts_min <'%s' and source.last_seen >= '%s' GROUP BY history.checksum ORDER BY  sum(ts_cnt) DESC ,Query_time_sum DESC LIMIT 20" %(week,today,yestoday)
+    sql="select SUM(ts_cnt),left(SUM(Query_time_sum)/SUM(ts_cnt),5),source.first_seen,source.last_seen,history.sample,CHECKSUM FROM  slow_query.global_query_review AS source JOIN slow_query.global_query_review_history AS history USING (CHECKSUM) WHERE history.ts_min >='%s' AND history.ts_min <'%s' GROUP BY history.checksum ORDER BY sum(ts_cnt) DESC LIMIT 20" %(week,today)
     try:
       dbcon = mysql.connect(host='127.0.0.1', user='root', passwd='123456, db='slow_query', port=3306,charset='utf8')
       cur = dbcon.cursor()
