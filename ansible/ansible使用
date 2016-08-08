@@ -1,0 +1,87 @@
+﻿ansible的使用：
+1.配置文件的设置：/ets/ansible/hosts
+[webservers]
+172.16.10.53
+172.16.10.54
+
+2.测试使用：
+ansible 172.16.10.53 -m ping -k
+# 没有配置密钥的话，默认请求输入root的密码
+
+3.配置ssh无密码访问：
+ssh-keygen -t rsa
+ssh-copy-id -i /root/.ssh/id_rsa.pub root@172.16.10.53
+
+4.ansible常见模块使用：
+# script：在远程主机执行主控端的脚本，shell：执行远程机器目录下的脚本，command：运行远程权限范围内的所有shell命令
+ansible webservers -m command -a "free -m"
+ansible webservers -m script -a "/home/test.sh 12 34"
+ansible webservers -m shell -a "/home/test.sh"
+
+# copy模块：实现主控端向目标主机拷贝文件，类似于scp的功能
+ansible webservers -m copy -a "src=/home/test.sh dest=/tmp/ owner=root group=root mode=0755"
+
+# stat模块：获取远程文件状态信息，包括atime，ctime，mtime，MD5，uid，gid
+ansible webservers -m stat -a "path=/etc/sysctl.conf"
+
+# get_url模块：实现远程主机下载指定url到本地，支持sha256sum文件校验
+ansible webservers -m get_url -a "url=http://www.baidu.com dest=/tmp/index.html mode=0440 force=yes"
+
+# yum模块：linux平台软件包管理，常见有yum，apt方式
+ansible webservers -m apt -a "pkg=curl state=latest"
+ansible webservers -m yum -a "name=curl state=latest"
+
+# cron模块：远程主机crontab配置
+ansible webservers -m cron -a "name='check dirs' hour='5,2' job='ls -alh > /dev/null'"
+
+# mount模块：远程主机分区挂载
+ansible webservers -m mount -a "name=/mnt/data src=/dev/sd0 fstype=ext3 opts=ro state=present"
+
+# service模块：远程主机系统服务管理
+ansible webservers -m service -a "name=nginx state=stopped"
+ansible webservers -m service -a "name=nginx state=restarted"
+ansible webservers -m service -a "name=nginx state=reloaded"
+
+# user模块：远程主机系统用户管理
+#添加用户johnd；
+ansible webservers -m user -a "name=johnd comment='John Doe'"
+#删除用户johnd；
+ansible webservers -m user -a "name=johnd state=absent remove=yes"
+
+5.ansible playbook 范例：
+- hosts： webservers
+	vars：
+		worker_processes： 4
+		num_cpus： 4
+		max_open_file： 65506
+		root： /data
+	remote_user： root
+	tasks：
+	- name： ensure nginx is at the latest version
+		yum： pkg=nginx state=latest
+	- name： write the nginx config file
+		template： src=/home/test/ansible/nginx/nginx2.conf dest=/etc/nginx/nginx.conf
+		notify：
+		- restart nginx
+	- name： ensure nginx is running
+		service： name=nginx state=started
+	handlers：
+		- name： restart nginx
+			service： name=nginx state=restarted
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

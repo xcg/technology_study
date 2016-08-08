@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>股票成本价计算器</title>
+<br>此程序为了方便计算成本价 股票交易费用成本计算器
+<script type ="text/javascript">
+function jss()
+{
+
+
+var dj11=document.getElementById("dj1").value;
+var dj22=document.getElementById("dj2").value;
+var num11=document.getElementById("num1").value;
+var num22=document.getElementById("num2").value;
+if(dj11<0 || dj11=="")
+{
+alert("买入价有误！");
+return false;
+}
+if(dj22<0 || dj22=="")
+{
+alert("股数有误！");
+return false;
+}
+
+if(num11<0 || num11=="")
+{
+alert("当前价有误！");
+return false;
+}
+
+if(num22<0 || num22=="")
+{
+alert("股数有误！");
+return false;
+}
+var money1=dj11*num11;
+var money2=dj22*num22;
+var money=money1+money2;
+var num11=num11*1.000;
+var num22=num22*1.000;
+var num=num11+num22;
+var result=money*1.000/num;
+alert("均价为"+result);
+}
+</script>
+</head>
+<body>
+<form id="form1" name="form1">
+<table 
+width ="600px" align="center">
+
+<tr>
+<td style="width: 241px">成本价:<input type="text" name="dj1" id="dj1" value="" /></td>
+<td>已购股数：<input type="text" name="num1" id="num1" value="" /></td>
+</tr>
+<tr>
+<td style="width: 241px">当前价:<input type="text" name="dj2" value="" id="dj2" /></td>
+<td>预购股数：<input type="text" http://www.crow.cc name="num2" id="num2" value=""/></td>
+</tr>
+<tr>
+<td style="width: 241px" colspan="2" align ="right">
+
+<input type="button" value="计算" id="bt" onclick="jss()"/>
+</td>
+</tr>
+<tr>
+<td colspan ="2">
+
+</td>
+</tr>
+
+</table> 
+</form>
+</body>
+</html> 

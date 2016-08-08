@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Produced by Beyond Compare 3 from Scooter Software -->
+<BCState>
+	<TBcState>
+		<FirstStartup Value="False"/>
+		<FormPosStr Value="77;0;1018;680;3"/>
+	</TBcState>
+	<TBrowseState>
+		<FormPosStr Value="538;158;1061;701"/>
+	</TBrowseState>
+	<TCheckForUpdatesState>
+		<Build Value="18414"/>
+	</TCheckForUpdatesState>
+	<TDirCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\views"/>
+			<_1 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master"/>
+			<_2 Value="C:\Users\001497\Desktop\douban"/>
+			<_3 Value="C:\Users\001497\Desktop\ecshop\admin\templates"/>
+			<_4 Value="C:\Users\001497\Desktop\ecshop\admin\styles"/>
+			<_5 Value="C:\Users\001497\Desktop\ecshop\admin\js"/>
+			<_6 Value="C:\Users\001497\Desktop\ecshop\admin\includes"/>
+			<_7 Value="C:\Users\001497\Desktop\ecshop\admin\images\charts"/>
+			<_8 Value="C:\Users\001497\Desktop\ecshop\admin\images"/>
+		</LeftMRUSpecs>
+		<LogHeight Value="184"/>
+		<RightMRUSpecs>
+			<_0 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\views"/>
+			<_1 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master"/>
+			<_2 Value="F:\python\web\douban"/>
+			<_3 Value="C:\Users\001497\Desktop\maijiu\admin\templates"/>
+			<_4 Value="C:\Users\001497\Desktop\maijiu\admin\styles"/>
+			<_5 Value="C:\Users\001497\Desktop\maijiu\admin\js"/>
+			<_6 Value="C:\Users\001497\Desktop\maijiu\admin\includes"/>
+			<_7 Value="C:\Users\001497\Desktop\maijiu\admin\images\charts"/>
+			<_8 Value="C:\Users\001497\Desktop\maijiu\admin\images"/>
+		</RightMRUSpecs>
+		<SessionFormPosStr Value="499;124;1100;736"/>
+	</TDirCompareState>
+	<THexCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\001497\Desktop\douban\app.pyc"/>
+		</LeftMRUSpecs>
+		<MRUFonts>
+			<_0 Value="Consolas;10"/>
+		</MRUFonts>
+		<RightMRUSpecs>
+			<_0 Value="F:\python\web\douban\app.pyc"/>
+		</RightMRUSpecs>
+	</THexCompareState>
+	<THomeState>
+		<SessionType Value="TTextCompareSession"/>
+	</THomeState>
+	<TSessionSaveAsState>
+		<FormPosStr Value="747;360;1172;679"/>
+	</TSessionSaveAsState>
+	<TTextCompareState>
+		<LeftMRUSpecs>
+			<_0 Value="D:\mysqld_5.6"/>
+			<_1 Value="C:\Users\001497\Desktop\1HOSS-CA-create-db-01.sql"/>
+			<_2 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\QueryTableParser.php"/>
+			<_3 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\QueryRewrite.php"/>
+			<_4 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\QueryExplain.php"/>
+			<_5 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\MySQLTableReport.php"/>
+			<_6 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\Loader.php"/>
+			<_7 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\Helpers.php"/>
+			<_8 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\AnemometerModel.php"/>
+		</LeftMRUSpecs>
+		<MRUFonts>
+			<_0 Value="Consolas;10"/>
+		</MRUFonts>
+		<RightMRUSpecs>
+			<_0 Value="D:\mysqld_mariadb"/>
+			<_1 Value="C:\Users\001497\Desktop\HOSS-CA-create-db-01.sql"/>
+			<_2 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\QueryTableParser.php"/>
+			<_3 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\QueryRewrite.php"/>
+			<_4 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\QueryExplain.php"/>
+			<_5 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\MySQLTableReport.php"/>
+			<_6 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\Loader.php"/>
+			<_7 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\Helpers.php"/>
+			<_8 Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\AnemometerModel.php"/>
+		</RightMRUSpecs>
+	</TTextCompareState>
+	<TTextEditState>
+		<LeftMRUSpecs>
+			<_0 Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\TestQueryRewrite.php"/>
+		</LeftMRUSpecs>
+		<MRUFonts>
+			<_0 Value="Consolas;10"/>
+		</MRUFonts>
+	</TTextEditState>
+	<TTextFindState>
+		<FindItems>
+			<_0 Value="update"/>
+			<_1 Value="addBrokerBy"/>
+			<_2 Value="download_code"/>
+			<_3 Value="createGroupBuyClient"/>
+			<_4 Value="SOURCE_WAY"/>
+			<_5 Value="projectAssistantGroupBuyService.createGroupBuyClien"/>
+			<_6 Value="projectAssistantGroupBuyService"/>
+			<_7 Value="pushMessage"/>
+			<_8 Value="getFilingClient"/>
+		</FindItems>
+		<ReplaceItems>
+			<_0/>
+		</ReplaceItems>
+	</TTextFindState>
+	<TVerCompareState>
+		<MRUFonts>
+			<_0 Value="微软雅黑;9;;1"/>
+		</MRUFonts>
+	</TVerCompareState>
+</BCState>

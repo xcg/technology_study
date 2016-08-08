@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Produced by Beyond Compare 3 from Scooter Software -->
+<BCSessions>
+	<TDirCompareSession Value="hoss-core">
+		<LastModified Value="2014-09-03 22:02:29"/>
+		<Rules>
+			<UseTimestampComparison Value="False"/>
+		</Rules>
+		<Specs>
+			<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-core"/>
+			<Right Value="E:\merge\hoss\trunk\hoss-core"/>
+		</Specs>
+	</TDirCompareSession>
+	<TSessionFolder>
+		<Items>
+			<TSessionFolder>
+				<Items>
+					<TTextCompareSession Value="1HOSS-CA-create-db-01.sql %3C--%3E HOSS-CA-create-db-01.sql">
+						<LastModified Value="2015-12-01 14:06:45"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\1HOSS-CA-create-db-01.sql"/>
+							<Right Value="C:\Users\001497\Desktop\HOSS-CA-create-db-01.sql"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="QueryTableParser.php">
+						<LastModified Value="2015-11-06 22:01:55"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\QueryTableParser.php"/>
+							<Right Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\lib\QueryTableParser.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TDirCompareSession Value="views">
+						<LastModified Value="2015-11-06 21:52:32"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master\views"/>
+							<Right Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\views"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TTextCompareSession Value="AnemometerModel.php">
+						<LastModified Value="2015-11-06 21:50:48"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\AnemometerModel.php"/>
+							<Right Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master\lib\AnemometerModel.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TDirCompareSession Value="Anemometer-master %3C--%3E anemometerAudit_SQL-master">
+						<LastModified Value="2015-11-06 15:47:20"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\Anemometer-master\Anemometer-master"/>
+							<Right Value="C:\Users\001497\Desktop\anemometerAudit_SQL-master\anemometerAudit_SQL-master"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TDirCompareSession Value="douban">
+						<LastModified Value="2015-08-26 16:52:34"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\douban"/>
+							<Right Value="F:\python\web\douban"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TTextCompareSession Value="hossv2_new_test.sql %3C--%3E hossv2_new_test_30.sql">
+						<LastModified Value="2015-07-10 12:47:46"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\hossv2_new_test.sql"/>
+							<Right Value="C:\Users\001497\Desktop\hossv2_new_test_30.sql"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="master_ip_online_change %3C--%3E master_ip_online_change_sh">
+						<LastModified Value="2015-07-02 17:28:48"/>
+						<Specs>
+							<Left Value="D:\DB_Software\MHA-0.56\mha4mysql-manager-0.56\mha4mysql-manager-0.56\samples\scripts\master_ip_online_change"/>
+							<Right Value="D:\DB_Software\MHA-0.56\mha4mysql-manager-0.56\mha4mysql-manager-0.56\samples\scripts\master_ip_online_change_sh"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="lib_compositor.php">
+						<LastModified Value="2015-06-25 13:51:39"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\ecshop patch\includes\lib_compositor.php"/>
+							<Right Value="C:\Users\001497\Desktop\maijiu\includes\lib_compositor.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="epay.php %3C--%3E alipay.php">
+						<LastModified Value="2015-06-25 00:29:42"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\ecshop patch\includes\modules\payment\epay.php"/>
+							<Right Value="C:\Users\001497\Desktop\maijiu\includes\modules\payment\alipay.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="MerPrK_808080071894118_20141028140457.key %3C--%3E user_msg.php">
+						<LastModified Value="2015-06-24 22:54:24"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\ecshop patch\data\pay\MerPrK_808080071894118_20141028140457.key"/>
+							<Right Value="C:\Users\001497\Desktop\maijiu\admin\user_msg.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="menu.js %3C--%3E common.js">
+						<LastModified Value="2015-06-24 21:53:41"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\ecshop\admin\js\menu.js"/>
+							<Right Value="C:\Users\001497\Desktop\maijiu\admin\js\common.js"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="menu.js">
+						<LastModified Value="2015-06-24 20:32:52"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\ecshop patch\admin\js\menu.js"/>
+							<Right Value="C:\Users\001497\Desktop\maijiu\admin\js\menu.js"/>
+						</Specs>
+					</TTextCompareSession>
+					<TDirCompareSession Value="templates">
+						<LastModified Value="2015-06-24 19:40:26"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\ecshop\admin\templates"/>
+							<Right Value="C:\Users\001497\Desktop\maijiu\admin\templates"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TDirCompareSession Value="ECShop %3C--%3E www">
+						<LastModified Value="2015-06-24 18:26:19"/>
+						<Specs>
+							<Left Value="C:\wamp5\www\ECShop"/>
+							<Right Value="C:\wamp5\www"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TTextCompareSession Value="innodb_chart.php %3C--%3E resource_chart.php">
+						<LastModified Value="2015-06-12 15:52:16"/>
+						<Specs>
+							<Left Value="D:\Lepus\lepus_v3.7\php\application\views\mysql\innodb_chart.php"/>
+							<Right Value="D:\Lepus\lepus_v3.7\php\application\views\mysql\resource_chart.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="lp_os.php %3C--%3E lp_mysql.php">
+						<LastModified Value="2015-06-12 10:20:13"/>
+						<Specs>
+							<Left Value="D:\Lepus\lepus_v3.7\php\application\controllers\lp_os.php"/>
+							<Right Value="D:\Lepus\lepus_v3.7\php\application\controllers\lp_mysql.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="servers_os.php %3C--%3E servers_mysql.php">
+						<LastModified Value="2015-06-11 18:07:19"/>
+						<Specs>
+							<Left Value="D:\Lepus\lepus_v3.7\php\application\controllers\servers_os.php"/>
+							<Right Value="D:\Lepus\lepus_v3.7\php\application\controllers\servers_mysql.php"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="monitor.sql %3C--%3E monitor_new.sql">
+						<LastModified Value="2015-06-11 13:52:44"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\monitor.sql"/>
+							<Right Value="C:\Users\001497\Desktop\monitor_new.sql"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="anemometer_collect.sh %3C--%3E anemometer_collect.sh_bak">
+						<LastModified Value="2015-05-18 16:51:04"/>
+						<Specs>
+							<Left Value="D:\anemometer_collect.sh"/>
+							<Right Value="D:\anemometer_collect.sh_bak"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="新建文本文档.txt %3C--%3E orzdba-old">
+						<LastModified Value="2015-03-26 17:37:03"/>
+						<Specs>
+							<Left Value="C:\Users\001497\Desktop\新建文本文档.txt"/>
+							<Right Value="D:\orzdba\orzdba-old"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="orzdba %3C--%3E orzdba-old">
+						<LastModified Value="2015-03-26 16:22:38"/>
+						<Specs>
+							<Left Value="D:\orzdba\orzdba"/>
+							<Right Value="D:\orzdba\orzdba-old"/>
+						</Specs>
+						<State>
+							<DisplayFilter Value="[showLeftMod, showRightMod, showDiffMod]"/>
+						</State>
+					</TTextCompareSession>
+					<TTextCompareSession Value="pom.xml">
+						<LastModified Value="2014-12-30 14:13:43"/>
+						<Specs>
+							<Left Value="C:\Users\001122\Desktop\pom.xml"/>
+							<Right Value="C:\Users\001122\Desktop\wanglei\pom.xml"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="pom.xml">
+						<LastModified Value="2014-12-12 15:06:45"/>
+						<Specs>
+							<Left Value="C:\Users\001122\Desktop\pom.xml"/>
+							<Right Value="C:\Users\001122\Desktop\新建文件夹\pom.xml"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="log4j.properties">
+						<LastModified Value="2014-12-11 17:30:20"/>
+						<Specs>
+							<Left Value="C:\Users\001122\Desktop\log4j.properties"/>
+							<Right Value="C:\Users\001122\Desktop\2014-12-10\log4j.properties"/>
+						</Specs>
+					</TTextCompareSession>
+					<TTextCompareSession Value="log4j01.properties %3C--%3E log4j.properties">
+						<LastModified Value="2014-09-15 17:32:16"/>
+						<Specs>
+							<Left Value="C:\Users\Administrator\Desktop\log4j01.properties"/>
+							<Right Value="C:\Users\Administrator\Desktop\log4j.properties"/>
+						</Specs>
+					</TTextCompareSession>
+					<TDirCompareSession Value="SQL">
+						<LastModified Value="2014-09-09 11:12:30"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="C:\Users\Administrator\Desktop\SQL-11\SQL"/>
+							<Right Value="C:\Users\Administrator\Desktop\SQL-10\SQL"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TDirCompareSession Value="SQL-9 %3C--%3E SQL-8">
+						<LastModified Value="2014-09-06 23:11:04"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="C:\Users\Administrator\Desktop\SQL-9"/>
+							<Right Value="C:\Users\Administrator\Desktop\SQL-8"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-web-910 %3C--%3E hoss-web">
+						<LastModified Value="2014-09-05 19:48:03"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss\hoss-web\branch\hoss-web-910"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-web"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-projectAssistant">
+						<LastModified Value="2014-09-05 19:47:57"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-projectAssistant"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-projectAssistant"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-advertisement">
+						<LastModified Value="2014-09-05 19:27:24"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-advertisement"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-advertisement"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-society">
+						<LastModified Value="2014-09-05 15:42:37"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-society"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-society"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-core">
+						<LastModified Value="2014-09-05 15:17:00"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-core"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-core"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-push">
+						<LastModified Value="2014-09-05 14:25:08"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-base\hoss-push"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-push"/>
+						</Specs>
+						<State>
+							<SortCol Value="colSize"/>
+							<SortSide Value="dsRight"/>
+						</State>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-common">
+						<LastModified Value="2014-09-05 01:40:42"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-common"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-common"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-schedule">
+						<LastModified Value="2014-09-05 01:29:26"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-schedule"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-schedule"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-agent">
+						<LastModified Value="2014-09-04 22:44:54"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-agent"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-agent"/>
+						</Specs>
+					</TDirCompareSession>
+					<TDirCompareSession Value="hoss-org">
+						<LastModified Value="2014-09-04 16:02:07"/>
+						<Rules>
+							<UseTimestampComparison Value="False"/>
+						</Rules>
+						<Specs>
+							<Left Value="E:\merge\hossv2\haowuCN-hoss-others\hoss-org"/>
+							<Right Value="E:\merge\hoss\trunk\hoss-org"/>
+						</Specs>
+					</TDirCompareSession>
+				</Items>
+			</TSessionFolder>
+			<TDirCompareSession>
+				<State>
+					<SortCol Value="colSize"/>
+					<SortSide Value="dsRight"/>
+				</State>
+			</TDirCompareSession>
+		</Items>
+	</TSessionFolder>
+</BCSessions>
