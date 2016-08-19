@@ -1,0 +1,27 @@
+数据库运维系统开发项目：
+在14年底的时候就想做一套MySQL的运维方案了，大体就是将MySQL的部署、监控、备份、高可用、优化、性能分析、容灾、故障处理等都做成通用的，结合现在市面上的各种工具，维护一套完成的系统，最好全部界面化。一套完整的平台包含强有力的监控系统、SQL审核系统、日志分析系统、统计系统、备份系统、管理系统、中间件。上面的各个功能可以从下面的几条开始做。
+1、部署：
+     1）、  MySQL 部署：   MySQL  5.5   5.6版本的部署
+     2）、 辅助工具部署：
+              性能分析工具：innotop、iotop、mysqlreport、orzdba
+              压测工具：sysbench、tpcc
+              运维工具：percona-toolkit、percona-xtrabackup、mysqldump
+              慢查分析工具以及SQL审核：mysqlsla、mysqldumpslow  
+2、监控：使用zabbix监控
+3、备份：使用xtrabackup做全备、增备。也可以使用mysqldump做小库的备份
+4、高可用：haproxy+keepalived实现高可用负载均衡 或者看看percona xtradb cluster
+5、优化、性能分析：结合第一部分的性能分析工具
+6、故障恢复
+注：硬件、网络等技术也需要熟悉
+
+DBA自动化运维工具思路：
+     http://segmentfault.com/a/1190000000574071
+python django 后台：
+     https://github.com/ouzhigang/django-ozgweb
+开源项目：
+     http://crazyeyedoc.readthedocs.org/en/latest/#
+isdba 牛逼的DBA：
+     http://isadba.com/?p=672
+     http://rfyiamcool.blog.51cto.com/1030776/1428425
+     http://brotherxing.blog.51cto.com/3994225/1607931
+
