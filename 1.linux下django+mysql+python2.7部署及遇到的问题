@@ -1,0 +1,81 @@
+1. 安装pip
+这里利用官方的python脚本来安装
+# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# chmod +x get-pip.py
+# python get-pip.py
+
+2.安装最新版的diango
+# pip install Django==1.11.4
+
+3.安装mysql，这里安装的是mariadb10.2版本，需要glibc2.14
+(1).glibc 升级为214或215
+# wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz
+# tar xvf glibc-2.14.tar.gz
+# cd glibc-2.14
+# mkdir build
+# cd ./build
+# ../configure --prefix=/apps/svr/glibc-2.14
+# make -j 4
+# make install
+# export LD_LIBRARY_PATH=/apps/svr/glibc-2.14/lib:$LD_LIBRARY_PATH
+
+@ 升级到215
+# get http://ftp.gnu.org/gnu/glibc/glibc-2.15.tar.gz     
+# wget http://ftp.gnu.org/gnu/glibc/glibc-ports-2.15.tar.gz    
+# tar -xvf  glibc-2.15.tar.gz     
+# tar -xvf  glibc-ports-2.15.tar.gz    
+# mv glibc-ports-2.15 glibc-2.15/ports     
+# mkdir glibc-build-2.15      
+# cd glibc-build-2.15        
+# ../glibc-2.15/configure  --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin  
+# make -j 4  
+# make install  
+
+(2).检查glibc版本：
+# getconf -a |grep glibc -i
+# strings /usr/lib64/libc.so.6 | grep GLIBC
+
+(3).安装mariadb，需要numctl包：
+@ 报错：/apps/svr/mariadb10//bin/mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory
+# yum -y install numactl
+
+(4).安装mariadb，提示libstdc++ 错误，需要升级gcc到4.8.1(支持c++11)：
+# wget http://ftp.gnu.org/gnu/gcc/gcc-4.8.1/gcc-4.8.1.tar.gz
+# tar -xvzf gcc-4.8.1.tar.gz
+# cd gcc-4.8.1
+# ./contrib/download_prerequisites
+# cd ..
+# mkdir build_gcc_4.8.1
+# cd build_gcc_4.8.1
+# ../gcc-4.8.1/configure --enable-checking=release --enable-languages=c,c++ --disable-multilib  
+# make -j 4 
+# make install
+
+@ 检查是否支持
+# strings /usr/local/lib64/libstdc++.so.6 | grep GLIBC
+# strings /usr/lib64/libstdc++.so.6 | grep GLIBC
+
+@ 建立软连接
+@ 复制刚才生成的libstdc++到对用目录，并建立新的软链
+# cp /usr/local/lib64/libstdc++.so.6.0.18 /usr/lib64/
+# rm  -rf libstdc++.so.6
+# ln -s libstdc++.so.6.0.18 libstdc++.so.6
+
+4.安装python2.7，默认linux下安装的python2.6
+# wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
+# tar -jxvf Python-2.7.3.tar.bz2
+# cd Python-2.7.3
+# ./configure  
+# make all             
+# make install  
+# make clean  
+# make distclean
+# /usr/local/bin/python2.7 -V
+
+@ 修改原python2.6的软连接
+# mv /usr/bin/python /usr/bin/python2.6.6  
+# ln -s /usr/local/bin/python2.7 /usr/bin/python 
+
+@ 解决系统Python 软链接指向Python2.7 版本后，因为yum是不兼容 Python 2.7的，所以yum不能正常工作，我们需要指定 yum 的Python版本
+# vi /usr/bin/yum
+  将文件头部的#!/usr/bin/python改成 #!/usr/bin/python2.6.6
