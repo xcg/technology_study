@@ -1,0 +1,168 @@
+安装说明
+系统环境：CentOS6、CentOS7、Red Hat6、Red Hat7
+软件：nginx-1.8.0.tar.gz
+其他所需软件：openssl-1.0.2d.tar.gz、pcre-8.37.tar.gz、zlib-1.2.8.tar.gz
+安装方式：源码编译安装 
+安装位置：/usr/local/nginx 
+下载地址：http://nginx.org/en/download.html
+
+安装前提
+在安装nginx前，需要确保系统安装了g++、gcc
+
+ 
+
+1.安装openssl软件
+#
+#----------------------------------------
+# 下载地址： http://www.openssl.org/
+#----------------------------------------
+
+#进入安装目录
+cd /usr/local/
+
+
+#删除原有安装
+rm -rf openssl
+rm -rf openssl-1.0.2d
+
+#解压
+tar -zxv -f openssl-1.0.2d.tar.gz
+
+#进入源码目录
+cd openssl-1.0.2d
+
+#配置
+./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl/conf
+
+#编译安装
+make && make install
+
+#检验安装
+/usr/local/openssl/bin/openssl version -a 
+ 
+
+2.安装pcre软件
+
+#下载地址： http://www.pcre.org/
+
+#进入安装目录
+cd /usr/local/
+
+#删除原有安装
+rm -rf pcre
+rm -rf pcre-8.37 
+
+#解压
+tar -zxv -f pcre-8.37.tar.gz
+
+#进入源码目录
+cd pcre-8.37 
+
+#执行配置
+./configure --prefix=/usr/local/pcre/
+
+#编译安装
+make && make install
+ 
+
+3.安装zlib软件
+
+#进入安装目录
+cd /usr/local/
+
+#删除原有安装
+rm -rf zlib
+rm -rf zlib-1.2.8
+
+#解压
+tar -zxv -f zlib-1.2.8.tar.gz
+
+#进入源码目录
+cd zlib-1.2.8
+
+#配置
+./configure --prefix=/usr/local/zlib/
+
+# 编译安装
+make && make install
+ 
+
+4. 安装nginx软件
+
+#----------------------------------------------------------------
+# 安装前提： openssl、pcre、zlib
+# 注意：
+#    不使用自已安装的openssl的时候，要安装openssl-devel，否则编译不通过。
+#    yum install openssl-devel 此时参数可以不使用--with-open_ssl=/usr/local/openssl-1.0.1g
+#----------------------------------------------------------------
+
+#添加www用户和组
+groupadd www
+useradd -g www www
+
+
+#创建网站根目录
+mkdir -p     /var/www/root/
+chmod -R 775 /var/www/root/
+
+
+#进入安装目录
+cd /usr/local
+
+
+#删除原有安装
+rm -rf nginx
+rm -rf nginx-1.8.0
+
+#解压
+tar -zxvf nginx-1.8.0.tar.gz
+
+#进入安装目录
+cd nginx-1.8.0
+
+#配置(使用openssl、pcre、zlib的源码路径)
+./configure \
+--user=www \
+--group=www \
+--prefix=/usr/local/nginx \
+--with-http_ssl_module \
+--with-openssl=/usr/local/openssl-1.0.2d \
+--with-pcre=/usr/local/pcre-8.37 \
+--with-zlib=/usr/local/zlib-1.2.8 \
+--with-http_stub_status_module \
+--with-threads
+
+
+#编译安装
+make && make install
+
+#验证
+/usr/local/nginx/sbin/nginx -V
+修改配置文件
+
+vi /usr/local/nginx/conf/nginx.conf
+ 
+
+启动、重启
+
+#启动：
+/usr/local/nginx/sbin/nginx 
+
+#重启
+/usr/local/nginx/sbin/nginx -s reload
+停止
+
+#查询nginx主进程号 
+ps -ef | grep nginx
+#停止进程 
+kill -QUIT 主进程号 
+#快速停止 
+kill -TERM 主进程号 
+#强制停止 
+pkill -9 nginx
+
+测试
+#测试端口 
+netstat –na|grep 80
+#浏览器中测试 
+http://ip:80
