@@ -1,0 +1,60 @@
+1.安装Django
+@ 这里不详细说明
+@ 创建一个项目
+# django-admin.py startproject my_blog
+
+@ 修改配置文件，允许远程访问
+# vim /svn_service_dir/www/web/my_blog/my_blog/settings.py
+@ 内容修改如下： 
+# ALLOWED_HOSTS = ['*']
+
+@ 修改配置文件，存储引擎给为mysql
+@ 修改内容如下：
+DATABASES = {
+    'default': {
+@ 修改配置文件，存储引擎给为mysql
+@ 修改内容如下：
+@ 修改配置文件，存储引擎给为mysql
+@ 修改内容如下：
+@ 修改配置文件，存储引擎给为mysql
+@ 修改内容如下：
+@ 修改配置文件，存储引擎给为mysql
+@ 修改内容如下：
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_test',
+        'USER': 'super_dba',
+        'PASSWORD': '123456',
+        'HOST': '192.168.1.11',
+        'PORT': '3306',
+    }
+}
+
+@ 启动runserver：
+# python manage.py runserver 0.0.0.0:8080
+
+@ 如遇报错：'Did you install mysqlclient or MySQL-python?' 执行如下内容
+# pip install MySQL-python
+
+@ 测试：浏览器打开 192.168.1.11:8080
+
+2.安装uwsgi
+@ 编译安装
+# cd /svn_service_dir/package/uwsgi-2.0.11.2
+# python uwsgiconfig.py --build
+# cp uwsgi /usr/sbin/
+
+@ 启动
+# uwsgi --http :8001 --chdir /svn_service_dir/www/web/my_blog --module my_blog.wsgi
+@ --chdir:为项目所在目录
+
+@ 测试：浏览器打开 192.168.1.11:8001
+
+3.使用supervisor来管理进程
+@ 安装supervisor
+# pip install supervisor
+#
+
+
+
