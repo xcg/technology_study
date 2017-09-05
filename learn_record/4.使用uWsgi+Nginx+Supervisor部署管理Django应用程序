@@ -1,6 +1,5 @@
--- nginx安装
-1.使用yum安装
-yum install nginx
+一、nginx安装
+1.这个已经在上篇进行说明，这里不详述
 
 2.配置开机启动
 在/etc/init.d/目录下创建 nginx 文件
@@ -132,23 +131,21 @@ case "$1" in
         exit 2
 esac
 
-设置/etc/init.d/nginx 执行权限
+3.设置/etc/init.d/nginx 执行权限
 chmod 777 /etc/init.d/nginx
-设置开机默认启动
+
+4.设置开机默认启动
 chkconfig --add nginx //添加系统服务
 chkconfig --level 345 nginx on //设置开机启动,启动级别
 chkconfig --list nginx //查看开机启动配置信息
-nginx控制命令
+5.nginx控制命令
 service nginx start   #开启
 service nginx stop    #停止
 service nginx restart #重启
 service nginx reload  #重新加载
-在/etc/nginx/nginx.conf 主配置文件的http块中加入
-include /etc/nginx/conf.d/*.conf;  #所有的配置全部放入conf.d目录下的以.conf结尾的文件中
-3.nginx配置 示例
 
-vim /etc/nginx/conf.d/pysharp.conf
-拷贝以下内容
+6.编辑nginx conf文件
+vim /etc/nginx/conf/nginx.conf
 # nginx.conf
 # the upstream component nginx needs to connect to
 upstream pysharp {
@@ -182,16 +179,9 @@ server {
         include     /etc/nginx/uwsgi_params; # the uwsgi_params file you installed
     }
 }
--- uwsgi安装
-1.使用源码安装
-tar -zxvf  uwsgi-2.0.13.1.tar.gz
-mv  uwsgi-2.0.13.1/ uwsgi/
-cd uwsgi/
-python setup.py build  #使用virtualenv
-make
-将安装成功的uwsgi文件复制到/usr/local/bin目录
-cp uwsgi /usr/local/bin
 
+二、uwsgi安装
+1.安装在上篇已说明，在此不详述
 2.uwsgi配置 示例
 在Django应用程序目录下创建deploy文件夹，加入uwsgi.ini文件
 vim /project/pysharp/deploy/uwsgi.ini
@@ -218,12 +208,8 @@ chmod-socket    = 666
 # clear environment on exit
 vacuum      = true
 
-启动uwsgi
-uwsgi --ini uwsgi.ini
-
-supervisor安装
-1.使用python2.7的pip安装
-pip install supervisor
+三、supervisor安装
+1.安装不详述
 2.创建默认的配置文件
 echo_supervisord_conf  >/etc/supervisord.conf
 3.配置开机启动
@@ -349,22 +335,19 @@ case "$1" in
 esac
 
 exit $RETVAL
-设置/etc/init.d/supervisord 执行权限
 
+4.设置/etc/init.d/supervisord 执行权限
 chmod 777 /etc/init.d/supervisord
 设置开机默认启动
-
 chkconfig --add supervisord //添加系统服务
 chkconfig --level 345 supervisord on //设置开机启动,启动级别
 在/etc/supervisord.conf 的末尾加上
-
 [include]
 files = /etc/supervisor/conf.d/*.conf
 创建配置文件目录
-
 mkdir /etc/supervisor/conf.d
-4.应用程序进程管理配置 示例
 
+5.应用程序进程管理配置 示例
 vim /etc/supervisor/conf.d/uwsgi_start.conf
 拷贝以下内容
 ; ================================
@@ -372,25 +355,22 @@ vim /etc/supervisor/conf.d/uwsgi_start.conf
 ; ================================
 
 [program:uwsgi_pysharp]
-
 command=/usr/local/bin/uwsgi --ini /project/pysharp/deploy/uwsgi.ini
 directory=/project/pysharp/deploy
-
 user=root
 numprocs=1
-
 stdout_logfile=/var/log/django/uwsgi_start.log  #需要先手动创建文件夹
 stderr_logfile=/var/log/django/uwsgi_start.log
 autostart=true
 autorestart=true
 startsecs=10
 priority=997
-supervisor控制命令
 
+6.supervisor控制命令
 supervisorctl status  #查看进程运行状态
 supervisorctl reload  #重新加载配置
 
--- wsgi.py文件
+四、wsgi.py文件
 """
 WSGI config for wictrl project.
 
