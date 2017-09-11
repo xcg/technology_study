@@ -1,10 +1,8 @@
 一、nginx安装
 1.这个已经在上篇进行说明，这里不详述
 
-2.配置开机启动
-在/etc/init.d/目录下创建 nginx 文件
-vi /etc/init.d/nginx
-拷贝以下内容
+2.编写启动脚本
+[kongzhong@192.168.1.11(Unknow) sh]$ more nginx.sh 
 #!/bin/sh
 #
 # nginx - this script starts and stops the nginx daemon
@@ -16,19 +14,28 @@ vi /etc/init.d/nginx
 # config:      /etc/nginx/nginx.conf
 # config:      /etc/sysconfig/nginx
 # pidfile:     /var/run/nginx.pid
+
 # Source function library.
 . /etc/rc.d/init.d/functions
+
 # Source networking configuration.
 . /etc/sysconfig/network
+
 # Check that networking is up.
 [ "$NETWORKING" = "no" ] && exit 0
-nginx="/usr/sbin/nginx"
+
+nginx="/apps/svr/nginx-1.12.1/sbin/nginx"
 prog=$(basename $nginx)
+
 sysconfig="/etc/sysconfig/$prog"
 lockfile="/var/lock/subsys/nginx"
 pidfile="/var/run/${prog}.pid"
-NGINX_CONF_FILE="/etc/nginx/nginx.conf"
+
+NGINX_CONF_FILE="/apps/svr/nginx-1.12.1/conf/nginx.conf"
+
 [ -f $sysconfig ] && . $sysconfig
+
+
 start() {
     [ -x $nginx ] || exit 5
     [ -f $NGINX_CONF_FILE ] || exit 6
@@ -39,6 +46,7 @@ start() {
     [ $retval -eq 0 ] && touch $lockfile
     return $retval
 }
+
 stop() {
     echo -n $"Stopping $prog: "
     killproc -p $pidfile $prog
@@ -47,29 +55,36 @@ stop() {
     [ $retval -eq 0 ] && rm -f $lockfile
     return $retval
 }
+
 restart() {
     configtest_q || return 6
     stop
     start
 }
+
 reload() {
     configtest_q || return 6
     echo -n $"Reloading $prog: "
     killproc -p $pidfile $prog -HUP
     echo
 }
+
 configtest() {
     $nginx -t -c $NGINX_CONF_FILE
 }
+
 configtest_q() {
     $nginx -t -q -c $NGINX_CONF_FILE
 }
+
 rh_status() {
     status $prog
 }
+
 rh_status_q() {
     rh_status >/dev/null 2>&1
 }
+
 # Upgrade the binary with no downtime.
 upgrade() {
     local oldbin_pidfile="${pidfile}.oldbin"
@@ -90,6 +105,7 @@ upgrade() {
         return 1
     fi
 }
+
 # Tell nginx to reopen logs
 reopen_logs() {
     configtest_q || return 6
@@ -99,6 +115,7 @@ reopen_logs() {
     echo
     return $retval
 }
+
 case "$1" in
     start)
         rh_status_q && exit 0
@@ -129,10 +146,9 @@ case "$1" in
     *)
         echo $"Usage: $0 {start|stop|reload|configtest|status|force-reload|upgrade|restart|reopen_logs}"
         exit 2
-esac
 
-3.设置/etc/init.d/nginx 执行权限
-chmod 777 /etc/init.d/nginx
+3.设置/etc/init.d/nginx.sh 执行权限
+chmod 777 /etc/init.d/nginx.sh
 
 4.设置开机默认启动
 chkconfig --add nginx //添加系统服务
@@ -145,68 +161,136 @@ service nginx restart #重启
 service nginx reload  #重新加载
 
 6.编辑nginx conf文件
-vim /etc/nginx/conf/nginx.conf
-# nginx.conf
-# the upstream component nginx needs to connect to
-upstream pysharp {
-     server unix:///project/pysharp/pysharp.sock; # for a file socket
-    # server 127.0.0.1:8001; # for a web port socket (we'll use this first)
+[kongzhong@192.168.1.11(Unknow) conf]$ more nginx.conf
+
+user root;
+worker_processes  1;
+worker_rlimit_nofile 65535;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
 }
-# configuration of the server
-server {
-    # the port your site will be served on
-    listen      80;
-    #listen      443  ssl;
-    # the domain name it will serve for
-    server_name test.cn; # substitute your machine's IP address or FQDN
-    charset     utf-8;
 
-    # max upload size
-    client_max_body_size 75M;   # ad just to taste
 
-    # Django media
-    #location /media  {
-    #    alias /path/to/your/mysite/media;  # your Django project's media files - amend as required
-    #}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
 
-    location /static {     
-         alias /project/pysharp/static; # your Django project's static files - amend as required
-    }
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
 
-    # Finally, send all non-media requests to the Django server.
-    location / {
-        uwsgi_pass  pysharp;
-        include     /etc/nginx/uwsgi_params; # the uwsgi_params file you installed
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen       80;
+        server_name  192.168.1.11;
+        charset	     utf-8;
+        large_client_header_buffers 4 16k;
+        client_max_body_size 300m;
+        client_body_buffer_size 128k;
+
+        #proxy_connect_timeout 600;
+        #proxy_read_timeout 600;
+        #proxy_send_timeout 600;
+        #proxy_buffer_size 64k;
+        #proxy_buffers   4 32k;
+        #proxy_busy_buffers_size 64k;
+        #proxy_temp_file_write_size 64k;
+
+	    fastcgi_connect_timeout 300;
+	    fastcgi_read_timeout 300;
+	    fastcgi_send_timeout 300;
+	    fastcgi_buffer_size 64k;
+	    fastcgi_buffers   4 32k;
+	    fastcgi_busy_buffers_size 64k;
+	    fastcgi_temp_file_write_size 64k;
+        #charset koi8-r;
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            #root   html;
+            include uwsgi_params;
+            # 必须和uwsgi中的设置一致
+	    uwsgi_pass unix:/svn_service_dir/www/web/my_blog/uwsgi9000.sock;
+            # 入口文件，即wsgi.py相对于项目根目录的位置，“.”相当于一层目录
+            uwsgi_param UWSGI_SCRIPT my_blog.wsgi;
+            # 项目根目录
+            uwsgi_param UWSGI_CHDIR /svn_service_dir/www/web/my_blog;
+            index  index.html index.htm;
+            client_max_body_size 35m;
+        }
+        
+# your Django project's static files - amend as required
+         location /static {     
+             alias /svn_service_dir/www/web/my_blog/static;
+         }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
     }
 }
+
 
 二、uwsgi安装
 1.安装在上篇已说明，在此不详述
 2.uwsgi配置 示例
 在Django应用程序目录下创建deploy文件夹，加入uwsgi.ini文件
-vim /project/pysharp/deploy/uwsgi.ini
+vim /svn_service_dir/www/web/my_blog/uwsgi.ini
 拷贝以下内容
 [uwsgi]
 # Django-related settings
 # the base directory (full path)
-chdir       = /project/pysharp
+chdir       = /svn_service_dir/www/web/my_blog
 # Django's wsgi file
-module      = pysharp.wsgi
-# the virtualenv (full path)
-home        = /project/virtualenv/pysharp   #使用virtualenv
-# plugin        = python
+module      = my_blog.wsgi:application
 # process-related settings
-# master
-master      = true
 # maximum number of worker processes
-processes   = 10
+processes   = 1
 # the socket 
-socket      = /project/pysharp/pysharp.sock
-pidfile    = /project/pysharp/pysharp.pid
-# ... with appropriate permissions - may be needed
-chmod-socket    = 666
-# clear environment on exit
-vacuum      = true
+#socket = 127.0.0.1:9000
+socket = /svn_service_dir/www/web/my_blog/uwsgi9000.sock
+# 主进程
+master = true
+# 多站模式  
+vhost = true
+# 多站模式时不设置入口模块和文件    
+no-site = true    
+# 子进程数
+workers = 1 
+reload-mercy = 2     
+# 退出、重启时清理文件
+vacuum = true  
+max-requests = 1000   
+limit-as = 512
+buffer-size = 30000
+# pid文件，用于下面的脚本启动、停止该进程
+pidfile = /svn_service_dir/www/web/my_blog/uwsgi9000.pid 
+daemonize = /svn_service_dir/www/web/logs/uwsgi9000.log
+env = DJANGO_SETTINGS_MODULE=my_blog.settings
+#module = django.core.handlers.wsgi:WSGIHandler()
+#module = my_blog.wsgi:application
 
 三、supervisor安装
 1.安装不详述
@@ -214,8 +298,7 @@ vacuum      = true
 echo_supervisord_conf  >/etc/supervisord.conf
 3.配置开机启动
 在/etc/init.d/目录下创建 supervisord 文件
-vi /etc/init.d/supervisord
-拷贝以下内容
+[kongzhong@192.168.1.11(Unknow) sh]$ more supervisord.sh 
 #!/bin/bash
 #
 # supervisord   This scripts turns supervisord on
@@ -223,20 +306,31 @@ vi /etc/init.d/supervisord
 # description:  supervisor is a process control utility.  It has a web based
 #     xmlrpc interface as well as a few other nifty features.
 #
+
 # source function library
 . /etc/rc.d/init.d/functions
+
 set -a
-PREFIX=/usr/local/python2.7
+
+PREFIX=/usr/local
+
 SUPERVISORD=$PREFIX/bin/supervisord
 SUPERVISORCTL=$PREFIX/bin/supervisorctl
+
 PIDFILE=/var/supervisor/supervisord.pid
 LOCKFILE=/var/supervisor/supervisord.lock
-OPTIONS="-c /etc/supervisord.conf"
+
+OPTIONS="-c /etc/supervisor/supervisord.conf"
+
 # unset this variable if you don't care to wait for child processes to shutdown before removing the $LOCKFILE-lock
 WAIT_FOR_SUBPROCESSES=yes
+
 # remove this if you manage number of open files in some other fashion
 ulimit -n 96000
+
 RETVAL=0
+
+
 running_pid()
 {
   # Check if a given process pid's cmdline matches a given name
@@ -247,6 +341,7 @@ running_pid()
   (cat /proc/$pid/cmdline | tr "\000" "\n"|grep -q $name) || return 1
   return 0
 }
+
 running()
 {
 # Check if the process is running looking at /proc
@@ -259,6 +354,7 @@ running()
   running_pid $pid $SUPERVISORD || return 1
   return 0
 }
+
 start() {
     echo "Starting supervisord: "
 
@@ -266,13 +362,17 @@ start() {
     echo "ALREADY STARTED"
     return 1
   fi
+
   # start supervisord with options from sysconfig (stuff like -c)
-    $SUPERVISORD $OPTIONS
+  $SUPERVISORD $OPTIONS
+
   # show initial startup status
   $SUPERVISORCTL $OPTIONS status
+
   # only create the subsyslock if we created the PIDFILE
     [ -e $PIDFILE ] && touch $LOCKFILE
 }
+
 stop() {
     echo -n "Stopping supervisord: "
     $SUPERVISORCTL $OPTIONS shutdown
@@ -290,16 +390,20 @@ stop() {
             sleep $sleep
             total_sleep=$(( $total_sleep + $sleep ))
           fi
+
         fi
       done
     fi
+
     # always remove the subsys. We might have waited a while, but just remove it at this point.
     rm -f $LOCKFILE
 }
+
 restart() {
     stop
     start
 }
+
 case "$1" in
   start)
     start
@@ -341,36 +445,60 @@ chmod 777 /etc/init.d/supervisord
 设置开机默认启动
 chkconfig --add supervisord //添加系统服务
 chkconfig --level 345 supervisord on //设置开机启动,启动级别
-在/etc/supervisord.conf 的末尾加上
-[include]
-files = /etc/supervisor/conf.d/*.conf
-创建配置文件目录
-mkdir /etc/supervisor/conf.d
+在vim /etc/supervisor/supervisord.conf添加如下信息
+[kongzhong@192.168.1.11(Unknow) sh]$ more /etc/supervisor/supervisord.conf
+[unix_http_server]
+file=/tmp/supervisor.sock   ; (the path to the socket file)
+chmod=0700                 ; socket file mode (default 0700)
+chown=root:root		   ; socket file uid:gid owner
 
-5.应用程序进程管理配置 示例
-vim /etc/supervisor/conf.d/uwsgi_start.conf
-拷贝以下内容
-; ================================
-;  uwsgi supervisor
-; ================================
+[inet_http_server]         ; inet (TCP) server disabled by default
+port=*:9001           	   ; (ip_address:port specifier, *:port for all iface)
+username=admin             ; (default is no username (open server))
+password=admin             ; (default is no password (open server))
 
-[program:uwsgi_pysharp]
-command=/usr/local/bin/uwsgi --ini /project/pysharp/deploy/uwsgi.ini
-directory=/project/pysharp/deploy
-user=root
+[supervisord]
+logfile=/svn_service_dir/www/web/logs/supervisord.log ; (main log file;default $CWD/supervisord.log)
+logfile_maxbytes=50MB        ; (max main logfile bytes b4 rotation;default 50MB)
+logfile_backups=10           ; (num of main logfile rotation backups;default 10)
+loglevel=info                ; (log level;default info; others: debug,warn,trace)
+pidfile=/tmp/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
+nodaemon=false               ; (start in foreground if true;default false)
+minfds=1024                  ; (min. avail startup file descriptors;default 1024)
+minprocs=200                 ; (min. avail process descriptors;default 200)
+user=root                    ; (default is current user, required if root)
+childlogdir=/tmp             ; ('AUTO' child log dir, default $TEMP)
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+
+[program:my_blog]
+;command=/usr/sbin/uwsgi --http :8001 --chdir /svn_service_dir/www/web/my_blog --module my_blog.wsgi
+command=/usr/sbin/uwsgi --ini /svn_service_dir/www/web/my_blog/uwsgi.ini
+directory=/svn_service_dir/www/web/my_blog
+stopsignal=QUIT
 numprocs=1
-stdout_logfile=/var/log/django/uwsgi_start.log  #需要先手动创建文件夹
-stderr_logfile=/var/log/django/uwsgi_start.log
 autostart=true
-autorestart=true
-startsecs=10
-priority=997
+autorestart=unexpected
+redirect_stderr=true
+stdout_logfile=/svn_service_dir/www/web/logs/supervisor.log
+stderr_logfile=/svn_service_dir/www/web/logs/uwsgi_start.log
+exitcodes=1
+user=root
 
-6.supervisor控制命令
+5.supervisor控制命令
 supervisorctl status  #查看进程运行状态
 supervisorctl reload  #重新加载配置
 
 四、wsgi.py文件
+[kongzhong@192.168.1.11(Unknow) my_blog]$ more /svn_service_dir/www/web/my_blog/my_blog
+
+*** /svn_service_dir/www/web/my_blog/my_blog: directory ***
+
+[kongzhong@192.168.1.11(Unknow) my_blog]$ more /svn_service_dir/www/web/my_blog/my_blog/wsgi.py
 """
 WSGI config for wictrl project.
 
@@ -388,16 +516,15 @@ framework.
 """
 import os
 import sys
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "my_blog.settings")
 sys.path.append('/usr/local/lib/python2.7/site-packages')  
+
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
-
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
