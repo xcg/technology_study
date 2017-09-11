@@ -1,0 +1,46 @@
+1.进行项目目录：
+cd /svn_service_dir/www/web/my_blog/
+
+2.创建blog项目
+python manage.py startapp blog
+
+3.修改 blog 文件夹中的 models.py
+# coding:utf-8
+from django.db import models
+ 
+class Article(models.Model):
+    title = models.CharField(u'标题', max_length=256)
+    content = models.TextField(u'内容')
+ 
+    pub_date = models.DateTimeField(u'发表时间', auto_now_add=True, editable = True)
+    update_time = models.DateTimeField(u'更新时间',auto_now=True, null=True)
+   
+4.把 blog 加入到settings.py中的INSTALLED_APPS中
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+ 
+    'blog',
+)
+
+5.同步所有的数据表
+# 进入包含有 manage.py 的文件夹
+python manage.py makemigrations
+python manage.py migrate
+
+6.如果是 Django 不主动提示创建管理员（Django 1.9不提示）用下面的命令创建一个帐号
+python manage.py createsuperuser
+
+7.修改 admin.py 
+进入 blog 文件夹，修改 admin.py 文件（如果没有新建一个），内容如下
+from django.contrib import admin
+from .models import Article
+admin.site.register(Article)
+
+
+
+
