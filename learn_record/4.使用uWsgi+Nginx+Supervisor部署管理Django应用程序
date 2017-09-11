@@ -238,7 +238,7 @@ http {
         
 # your Django project's static files - amend as required
          location /static {     
-             alias /svn_service_dir/www/web/my_blog/static;
+             alias /usr/local/lib/python2.7/site-packages/django/contrib/admin/static;
          }
 
         #error_page  404              /404.html;
