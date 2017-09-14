@@ -5,15 +5,27 @@ cd /svn_service_dir/www/web/my_blog/
 python manage.py startapp blog
 
 3.修改 blog 文件夹中的 models.py
-# coding:utf-8
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.db import models
- 
+
+# Create your models here.
 class Article(models.Model):
-    title = models.CharField(u'标题', max_length=256)
+    title = models.CharField(verbose_name=u'标题', max_length=256)
     content = models.TextField(u'内容')
- 
     pub_date = models.DateTimeField(u'发表时间', auto_now_add=True, editable = True)
     update_time = models.DateTimeField(u'更新时间',auto_now=True, null=True)
+
+    def __unicode__(self):
+        return "%s:%s"%(self.title,self.content)
+
+    #def __str__(self):
+    #    return self.title
+
+    class Meta:
+        verbose_name = '文章'
+        verbose_name_plural = "文章"
+
    
 4.把 blog 加入到settings.py中的INSTALLED_APPS中
 INSTALLED_APPS = (
@@ -22,15 +34,19 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
- 
+    'django.contrib.staticfiles', 
     'blog',
 )
 
 5.同步所有的数据表
 # 进入包含有 manage.py 的文件夹
 python manage.py makemigrations
-python manage.py migrate
+python manage.py migrate   # 创建表结构
+
+----------------
+
+python manage.py makemigrations appname  # 让 Django 知道我们在我们的模型有一些变更
+python manage.py migrate appname   # 创建表结构
 
 6.如果是 Django 不主动提示创建管理员（Django 1.9不提示）用下面的命令创建一个帐号
 python manage.py createsuperuser
@@ -40,6 +56,11 @@ python manage.py createsuperuser
 from django.contrib import admin
 from .models import Article
 admin.site.register(Article)
+
+8.最新版的django，中文问题处理
+修改setting.py 中文编码为：LANGUAGE_CODE = 'zh-Hans'
+这个在后续版本中，应该会修复掉
+
 
 
 
