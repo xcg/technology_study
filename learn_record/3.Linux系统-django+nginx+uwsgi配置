@@ -46,8 +46,8 @@ DATABASES = {
 # cp uwsgi /usr/sbin/
 
 @ 启动
-# uwsgi --http :8001 --chdir /svn_service_dir/www/web/my_blog --module my_blog.wsgi
-@ --chdir:为项目所在目录
+# uwsgi --http :8001 --chdir /svn_service_dir/www/web/my_blog --module wsgi
+@ --chdir:为wsgi.py所在目录
 
 @ 测试：浏览器打开 192.168.1.11:8001
 
